@@ -1,6 +1,7 @@
 const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://refillflow.onrender.com"
+  process.env.NEXT_PUBLIC_API_BASE_URL || "https://backend-gray-one-39.vercel.app"
 ).replace(/\/$/, "");
+
 
 
 export async function getCases() {
