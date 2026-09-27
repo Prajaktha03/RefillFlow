@@ -18,17 +18,22 @@ app = FastAPI(
 )
 
 
-# Allow Next.js frontend to access FastAPI
+frontend_origins = os.getenv("FRONTEND_ORIGIN", "").strip()
+if frontend_origins and frontend_origins != "*":
+    origins = [origin.strip() for origin in frontend_origins.split(",") if origin.strip()]
+    allow_credentials = True
+else:
+    origins = ["*"]
+    allow_credentials = False
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[origin.strip() for origin in os.getenv(
-        "FRONTEND_ORIGIN",
-        "http://localhost:3000,http://127.0.0.1:3000",
-    ).split(",") if origin.strip()],
-    allow_credentials=True,
+    allow_origins=origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 # Register API routes
