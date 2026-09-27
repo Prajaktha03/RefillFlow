@@ -38,9 +38,3 @@ FastAPI + Pydantic + SQLAlchemy
           ↓
        Database
 
-
-
-Deploy software faster with centralized control across all enterprise devices.
-
-Ad
-More options
