@@ -25,8 +25,16 @@ from services.workflow_service import WorkflowService
 
 router = APIRouter(prefix="/prescription", tags=["Prescription Intelligence Assistant"])
 
-UPLOAD_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "prescriptions")
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+if os.getenv("VERCEL"):
+    UPLOAD_DIR = os.getenv("UPLOAD_DIR", "/tmp/uploads/prescriptions")
+else:
+    UPLOAD_DIR = os.getenv("UPLOAD_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "uploads", "prescriptions"))
+
+try:
+    os.makedirs(UPLOAD_DIR, exist_ok=True)
+except Exception:
+    pass
+
 
 
 def generate_rx_id(db: Session) -> str:
