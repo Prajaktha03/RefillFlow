@@ -18,21 +18,19 @@ app = FastAPI(
 )
 
 
-frontend_origins = os.getenv("FRONTEND_ORIGIN", "").strip()
-if frontend_origins and frontend_origins != "*":
-    origins = [origin.strip() for origin in frontend_origins.split(",") if origin.strip()]
-    allow_credentials = True
-else:
-    origins = ["*"]
-    allow_credentials = False
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=allow_credentials,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://frontend-pi-weld-64.vercel.app",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 
 
