@@ -28,13 +28,30 @@ Can staff see the complete history?
 
 ---
 
-### 📐 Architecture Overview
+## 🔌 Frontend and Backend Communication
+
+RefillFlow uses a separate frontend and backend architecture.
+
 ```text
-Next.js + React + TypeScript
-          ↓
-       REST API
-          ↓
-FastAPI + Pydantic + SQLAlchemy
-          ↓
-       Database
+Frontend (Next.js + React + TypeScript)
+  │
+  │ REST API
+  ▼
+Backend (FastAPI + Pydantic)
+  │
+  ▼
+SQLAlchemy
+  │
+  ▼
+SQLite Database
+```
+
+### 🌐 Local Development Ports
+
+| Service | Technology | Port | Access URL |
+| :--- | :--- | :--- | :--- |
+| **Frontend** | Next.js | `3000` | [http://localhost:3000](http://localhost:3000) |
+| **Backend** | FastAPI | `8000` | [http://localhost:8000](http://localhost:8000) |
+| **API Documentation** | Swagger / OpenAPI | `8000` | [http://localhost:8000/docs](http://localhost:8000/docs) |
+| **Database** | SQLite | N/A | Local File |
 
